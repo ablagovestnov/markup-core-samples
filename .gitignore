@@ -171,6 +171,6 @@ cython_debug/
 .pypirc
 
 # My files
-images
+images/
 yolo_data/images/
 yolo_data/labels/
