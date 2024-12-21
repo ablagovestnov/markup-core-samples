@@ -1,3 +1,8 @@
+# My files
+images/
+yolo_data/images/
+yolo_data/labels/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -169,8 +174,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-# My files
-images/
-yolo_data/images/
-yolo_data/labels/
