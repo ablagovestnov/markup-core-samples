@@ -1,10 +1,3 @@
-# My files
-images/
-images1/
-yolo_data2/
-yolo_data/images/
-yolo_data/labels/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -176,3 +169,14 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+# Игнорировать содержимое папки images, но оставить саму папку
+images/*
+!images/.gitkeep
+
+# Игнорировать содержимое папок yolo_data/images и yolo_data/labels, но оставить их
+yolo_data/images/*
+!yolo_data/images/.gitkeep
+yolo_data/labels/*
+!yolo_data/labels/.gitkeep
