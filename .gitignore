@@ -177,6 +177,6 @@ images/*
 
 # Игнорировать содержимое папок yolo_data/images и yolo_data/labels, но оставить их
 yolo_data/images/*
-!yolo_data/images/.gitkeep
+!yolo_data/images/train/.gitkeep
 yolo_data/labels/*
-!yolo_data/labels/.gitkeep
+!yolo_data/labels/train/.gitkeep
