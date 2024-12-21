@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# My files
+images
+yolo_data/images/
+yolo_data/labels/
