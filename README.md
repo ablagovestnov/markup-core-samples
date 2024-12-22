@@ -156,6 +156,11 @@ python main.py --debug
 labelImg output/images/train output/labels/train/classes.txt
 ```
 
+Для дебага (тестовые данные заранее включены в проект)
+```
+labelImg test_output/images/train test_output/labels/train/classes.txt
+```
+
 ---
 
 ## TODO
