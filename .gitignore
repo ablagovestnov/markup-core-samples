@@ -171,14 +171,14 @@ cython_debug/
 .pypirc
 
 
-# Игнорировать содержимое папки images, но оставить саму папку
-images/*
-!images/.gitkeep
+# Игнорировать содержимое папки input, но оставить саму папку
+input/*
+!input/.gitkeep
 
-# Игнорировать содержимое папок yolo_data/images и yolo_data/labels, но оставить их
-yolo_data/images/*
-!yolo_data/images/.gitkeep
-!yolo_data/images/train/.gitkeep
-yolo_data/labels/*
-!yolo_data/labels/train/.gitkeep
-!yolo_data/labels/.gitkeep
+# Игнорировать содержимое папок output/images и output/labels, но оставить их
+output/images/*
+!output/images/.gitkeep
+!output/images/train/.gitkeep
+output/labels/*
+!output/labels/train/.gitkeep
+!output/labels/.gitkeep

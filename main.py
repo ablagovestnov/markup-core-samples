@@ -1,6 +1,6 @@
 from pathlib import Path
 import cv2
-from lib.drill_core_process import DrillCoreProcess
+from drill_core_process import DrillCoreProcess
 
 def find_max_side(images_dir):
     """Находит максимальный размер стороны среди изображений."""
@@ -14,8 +14,12 @@ def find_max_side(images_dir):
 
 def main(name, debug=False):
     print(f'Hi, {name}')
+    
+    images_dir = Path('input')
 
-    images_dir = Path('images')
+    if debug:
+        images_dir = Path('test_input')
+
     if not images_dir.exists():
         print(f"Directory {images_dir} not found!")
         return

@@ -5,10 +5,10 @@ from functools import reduce
 import cv2
 import numpy as np
 import pandas as pd
-from test import PointsClusterer
+from points_clusterer import PointsClusterer
 
 class DrillCoreProcess:
-    def __init__(self, images_path='images/'):
+    def __init__(self, images_path='input/'):
         self.images_path = images_path
 
     def process_images(self, images, metrics=None, max_side=0, resize_to=512, purpose='train', debug=False):
@@ -88,10 +88,16 @@ class DrillCoreProcess:
         # Создаются файлы разметки для обнаруженных кернов в формате YOLO.
         self.fill_labeling_file(file_name, resized_image, drill_core_samples, resize_to, purpose)
 
-        # Сохраняется обработанное изображение.
-        cv2.imwrite(f'yolo_data/images/{purpose}/resized_{file_name}', resized_image)
+        dir = ''
         if debug:
-            print(f"Processed image saved as: yolo_data/images/{purpose}/resized_{file_name}")
+            dir = 'test_output'
+        else:
+            dir = 'output'
+
+        # Сохраняется обработанное изображение.
+        cv2.imwrite(f'{dir}/images/{purpose}/resized_{file_name}', resized_image)
+        if debug:
+            print(f"Processed image saved as: {dir}/images/{purpose}/resized_{file_name}")
             cv2.imshow("Resized Image", resized_image)
             cv2.waitKey(0)
         print(f"Processed and saved: {file_name}")
@@ -172,7 +178,12 @@ class DrillCoreProcess:
             height_norm = height_of_label_abs / image_height
 
             yolo_string.append(f'0 {x_center_norm} {y_center_norm} {width_norm} {height_norm}')
+        dir = ''
+        if debug:
+            dir = 'test_output'
+        else:
+            dir = 'output'
 
         # Сохраняется файл разметки для изображения.
-        with open(f'yolo_data/labels/{purpose}/resized_{file_name[:-4]}.txt', 'w') as f:
+        with open(f'{dir}/labels/{purpose}/resized_{file_name[:-4]}.txt', 'w') as f:
             f.write('\n'.join(yolo_string))
