@@ -14,7 +14,7 @@ def find_max_side(images_dir):
 
 def main(name, debug=False):
     print(f'Hi, {name}')
-    
+
     images_dir = Path('input')
 
     if debug:
@@ -36,7 +36,7 @@ def main(name, debug=False):
     dcp.process_images(
         images=[str(jpeg_path) for jpeg_path in jpegs],
         max_side=max_side,
-        resize_to=1024,
+        resize_to=512,
         purpose='train',  # Можно задать общий purpose или разделить внутри метода.
         debug=debug
     )

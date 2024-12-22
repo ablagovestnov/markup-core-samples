@@ -181,4 +181,5 @@ output/images/*
 !output/images/train/.gitkeep
 output/labels/*
 !output/labels/train/.gitkeep
+!output/labels/train/classes.txt
 !output/labels/.gitkeep

@@ -12,7 +12,7 @@ class DrillCoreProcess:
         self.images_path = images_path
 
     def process_images(self, images, metrics=None, max_side=0, resize_to=512, purpose='train', debug=False):
-
+        self.debug = debug
         for idx, image_path in enumerate(images):
             file_name = image_path.split('/')[-1]
             print(f"Processing image {idx + 1}/{len(images)}: {file_name}")
@@ -40,9 +40,10 @@ class DrillCoreProcess:
         blur = cv2.GaussianBlur(image, (5, 5), 0)
         # Выполняется выделение границ на изображении с помощью алгоритма Canny.
         edges = cv2.Canny(blur, 105, 200, None, 3)
-        if debug:
-            print("Edges detected")
-            cv2.imshow("Edges", edges)
+
+        # if debug:
+        #     print("Edges detected")
+        #     cv2.imshow("Edges", edges)
 
         # Обнаруживаются линии с использованием преобразования Хафа.
         lines = cv2.HoughLines(edges, 1, np.pi / 180, 150, None, 0, 0)
@@ -89,17 +90,17 @@ class DrillCoreProcess:
         self.fill_labeling_file(file_name, resized_image, drill_core_samples, resize_to, purpose)
 
         dir = ''
-        if debug:
+        if self.debug:
             dir = 'test_output'
         else:
             dir = 'output'
 
         # Сохраняется обработанное изображение.
         cv2.imwrite(f'{dir}/images/{purpose}/resized_{file_name}', resized_image)
-        if debug:
-            print(f"Processed image saved as: {dir}/images/{purpose}/resized_{file_name}")
-            cv2.imshow("Resized Image", resized_image)
-            cv2.waitKey(0)
+        # if debug:
+        #     print(f"Processed image saved as: {dir}/images/{purpose}/resized_{file_name}")
+        #     cv2.imshow("Resized Image", resized_image)
+        #     cv2.waitKey(0)
         print(f"Processed and saved: {file_name}")
 
     def extract_lines(self, lines):
@@ -179,7 +180,7 @@ class DrillCoreProcess:
 
             yolo_string.append(f'0 {x_center_norm} {y_center_norm} {width_norm} {height_norm}')
         dir = ''
-        if debug:
+        if self.debug:
             dir = 'test_output'
         else:
             dir = 'output'
