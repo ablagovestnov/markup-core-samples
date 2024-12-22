@@ -84,10 +84,12 @@ class DrillCoreProcess:
             print("ERROR: wrong core number")
             return
 
+
+        # Создаются файлы разметки для обнаруженных кернов в формате YOLO.
+        self.fill_labeling_file(file_name, saved, drill_core_samples, resize_to, purpose)
+
         # Масштабируется изображение до указанного размера.
         resized_image = self.resize_image(saved, resize_to)
-        # Создаются файлы разметки для обнаруженных кернов в формате YOLO.
-        self.fill_labeling_file(file_name, resized_image, drill_core_samples, resize_to, purpose)
 
         dir = ''
         if self.debug:
@@ -166,7 +168,6 @@ class DrillCoreProcess:
     def fill_labeling_file(self, file_name, img, cores, resize_to, purpose):
         yolo_string = []
         for core in cores:
-            # Вычисляются нормализованные координаты меток для формата YOLO.
             x_center_abs = round(core[0][0]) + (round(core[1][0]) - round(core[0][0])) / 2
             y_center_abs = round(core[0][1]) + (round(core[1][1]) - round(core[0][1])) / 2
             image_width, image_height = img.shape[1], img.shape[0]
@@ -174,17 +175,13 @@ class DrillCoreProcess:
             height_of_label_abs = round(core[1][1]) - round(core[0][1])
 
             x_center_norm = x_center_abs / image_width
-            y_center_norm = y_center_abs / image_height
+            y_center_norm = (y_center_abs - 350) / image_height
             width_norm = width_of_label_abs / image_width
             height_norm = height_of_label_abs / image_height
 
             yolo_string.append(f'0 {x_center_norm} {y_center_norm} {width_norm} {height_norm}')
-        dir = ''
-        if self.debug:
-            dir = 'test_output'
-        else:
-            dir = 'output'
+        dir = 'test_output' if self.debug else 'output'
 
-        # Сохраняется файл разметки для изображения.
         with open(f'{dir}/labels/{purpose}/resized_{file_name[:-4]}.txt', 'w') as f:
             f.write('\n'.join(yolo_string))
+

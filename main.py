@@ -36,7 +36,7 @@ def main(name, debug=False):
     dcp.process_images(
         images=[str(jpeg_path) for jpeg_path in jpegs],
         max_side=max_side,
-        resize_to=512,
+        resize_to=1024,
         purpose='train',  # Можно задать общий purpose или разделить внутри метода.
         debug=debug
     )
